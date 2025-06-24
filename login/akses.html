@@ -3,45 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wawan Sismadi</title>
+  <title>Dwi Putro Bagus Sugianto</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="profile-container">
+  <div class="profile-container">
   <div class="header-bg"></div>
 
   <div class="profile-photo-wrapper">
-    <img src="profile.png" alt="profile" class="profile-photo" />
+    <img src="ILY.jpg" alt="profile" class="profile-photo" />
   </div>
 
   <div class="header-text">
-    <h1>Wawan Sismadi</h1>
+    <h1>Dwi Putro Bagus Sugianto</h1>
     <p class="subtitle">He/Him • Web Developer</p>
-    <p>Jakarta, Indonesia • <a href="https://wawan.sismadi.com">wawan.sismadi.com</a></p>
-    <p><strong>Sismadi Langit Solusi</strong> — Universitas Ahmad Dahlan</p>
+    <p>Jakarta, Indonesia • <a href="https://dwiputrobagussugianto.github.io/PW/web/">dwi.com</a></p>
+    <p><strong>Dwi</strong> — Universitas IPWIJA</p>
   </div>
 
   <div class="action-buttons">
+    <button>Open to work</button>
+    <button>Add profile section</button>
+    <button>Enhance profile</button>
+  </div>
 
+  <div id="content"  >
 
-    <button id="loginBtn">Login untuk akses data</button>
-<button id="logoutBtn">Logout</button>
 
   </div>
 
-  <div id="content"></div>
+
 
   <div class="content-card">
-    <h3>Sosial Media</h3>
+    <h3>Sosial Media <small></small></h3>
     <ul>
-      <li><strong>linkedin :</strong> http://linkedin.com/in/sismadi</li>
+      <li><strong>linkedin :</strong> http://linkedin.com/in/sismadi </li>
       <li><strong>credly :</strong> https://www.credly.com/users/wawan-sismadi</li>
     </ul>
   </div>
 </div>
 
+
 <script type="module">
+// Import Supabase client dari CDN
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
 
 const SUPABASE_URL = 'https://beihxuvnthclarvuyood.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlaWh4dXZudGhjbGFydnV5b29kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk1NTc4NDMsImV4cCI6MjA2NTEzMzg0M30.asHOGEY1RZocdt9ODX0iQs1i4yA8rCL4WwEU7tIxUQY'
