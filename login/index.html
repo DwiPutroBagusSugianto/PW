@@ -7,18 +7,27 @@
 </head>
 <body>
 
-<div class="login-box" id="loginBox">
-  <h2>Login</h2>
-  <form id="loginForm">
-    <label>Username:
-      <input type="text" id="username" required>
-    </label>
-    <label>Password:
-      <input type="password" id="password" required>
-    </label>
-    <button type="submit">Login</button>
-  </form>
-</div>
+  <!-- Form Login -->
+  <div class="login-box" id="loginBox">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- Halaman Setelah Login -->
+  <div class="login-box" id="welcomeBox" style="display: none;">
+    <h2 id="welcome">Halo, User!</h2>
+    <button onclick="logout()">Logout</button>
+  </div>
 
 <div class="login-box" id="welcomeBox" style="display: none;">
   <h2 id="welcome">Halo, User!</h2>
