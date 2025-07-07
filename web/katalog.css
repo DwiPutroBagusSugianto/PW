@@ -1,0 +1,79 @@
+/* katalog.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fefefe;
+  color: #333;
+}
+
+header {
+  background-color: #ff5722;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.produk-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 40px 20px;
+  background-color: #f8f8f8;
+}
+
+.produk {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 280px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.produk:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.produk img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.produk h3 {
+  margin: 16px 0 8px;
+}
+
+.harga {
+  color: #ff5722;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e64a19;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
