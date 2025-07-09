@@ -118,3 +118,11 @@ a {
 .content-card ul {
   padding-left: 20px;
 }
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
