@@ -4,28 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hubungi IPWIJA Foodie</title>
-  <script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-
-  emailjs.init("myPTFSv_hHo0YXPT2"); // Ganti dengan Public Key kamu
-
-  document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const responseEl = document.getElementById("response");
-
-    emailjs.send("service_p4h68sg", "template_a0wwhxw", {
-      name: this.name.value,
-      email: this.email.value,
-      message: this.message.value
-    }).then(() => {
-      responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
-      this.reset();
-    }).catch((error) => {
-      console.log("EmailJS Error:", error);
-      responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
-    });
-  });
-</script>
   <style>
     body {
       font-family: sans-serif;
@@ -98,10 +76,11 @@
     </form>
   </div>
 
-  <script>
-    (function(){
-      emailjs.init("myPTFSv_hHo0YXPT2"); // Public key kamu
-    })();
+  <!-- Script EmailJS v4 -->
+  <script type="module">
+    import * as emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+
+    emailjs.init("myPTFSv_hHo0YXPT2"); // Public Key kamu
 
     document.getElementById("contact-form").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -112,11 +91,12 @@
         email: this.email.value,
         message: this.message.value
       })
-      .then(function() {
+      .then(() => {
         responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
-        document.getElementById("contact-form").reset();
-      }, function(error) {
-        console.log("EmailJS Error:", error);
+        this.reset();
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
         responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
       });
     });
