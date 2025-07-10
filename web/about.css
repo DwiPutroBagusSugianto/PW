@@ -54,6 +54,14 @@ h1 {
   line-height: 1.6;
 }
 
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
 @media(min-width: 768px) {
   .content {
     flex-direction: row;
