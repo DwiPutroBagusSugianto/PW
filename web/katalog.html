@@ -96,7 +96,7 @@
 
   <section id="pembayaran" style="display:none">
     <h2>Pilih Metode Pembayaran</h2>
-    <button onclick="prosesPembayaran('cash')">Bayar di Kasir (Cash)</button>
+    <button onclick="prosesPembayaran('cash')">Bayar di Kasir</button>
     <button onclick="prosesPembayaran('qr')">Bayar dengan Kode QR</button>
   </section>
 
@@ -145,9 +145,9 @@
       struk += `</ul><p><strong>Total: Rp ${total}</strong></p>`;
 
       if (metode === "cash") {
-        struk += `<p>Silakan bayar ke kasir dengan jumlah di atas.</p>`;
+        struk += `<p>Pesanan Anda akan di Siapkan!. Silakan bayar ke kasir dengan jumlah di atas.</p>`;
       } else if (metode === "qr") {
-        struk += `<p>Silakan scan QR Code di bawah ini untuk membayar:</p>`;
+        struk += `<p>Pesanan Anda akan di Siapkan!. Silakan scan QR Code di bawah ini untuk membayar:</p>`;
         struk += `<img src='image/qr.jpg' alt='QR Code' style='width:200px'/>`;
       }
 
