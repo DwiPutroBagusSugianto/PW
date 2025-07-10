@@ -4,7 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hubungi IPWIJA Foodie</title>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+
+  emailjs.init("myPTFSv_hHo0YXPT2"); // Ganti dengan Public Key kamu
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const responseEl = document.getElementById("response");
+
+    emailjs.send("service_p4h68sg", "template_a0wwhxw", {
+      name: this.name.value,
+      email: this.email.value,
+      message: this.message.value
+    }).then(() => {
+      responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
+      this.reset();
+    }).catch((error) => {
+      console.log("EmailJS Error:", error);
+      responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
+    });
+  });
+</script>
   <style>
     body {
       font-family: sans-serif;
