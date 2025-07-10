@@ -4,102 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hubungi IPWIJA Foodie</title>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #fff8f0;
+      font-family: sans-serif;
+      background-color: #fff7f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
     .contact-container {
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      width: 100%;
       max-width: 500px;
-      background: #ffffff;
-      padding: 25px;
-      margin: auto;
-      border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
     h1 {
       color: #e65c00;
-    }
-    label {
-      margin-top: 10px;
-      display: block;
-      font-weight: bold;
+      margin-bottom: 10px;
     }
     input, textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
+      margin-bottom: 20px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      font-size: 1rem;
     }
     button {
-      width: 100%;
       background-color: #e65c00;
-      color: white;
+      color: #fff;
       border: none;
-      padding: 12px;
-      margin-top: 15px;
-      font-weight: bold;
-      border-radius: 6px;
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
+      width: 100%;
     }
-    button:hover {
-      background-color: #cc5200;
-    }
-    #status {
-      margin-top: 15px;
+    .success {
       color: green;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <div class="contact-container">
+    <h1>Hubungi IPWIJA Foodie</h1>
+    <p>Kami siap menjawab pertanyaan dan pesan dari Anda.</p>
 
-<div class="contact-container">
-  <h1>Hubungi IPWIJA Foodie</h1>
-  <p>Kami siap menjawab pertanyaan dan pesan dari Anda.</p>
-  <form id="contact-form">
-    <label for="nama">Nama</label>
-    <input type="text" id="nama" name="nama" required>
+    <form id="contact-form">
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" placeholder="Nama Anda" required>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="email@domain.com" required>
 
-    <label for="pesan">Pesan</label>
-    <textarea id="pesan" name="pesan" rows="5" required></textarea>
+      <label for="message">Pesan</label>
+      <textarea id="message" name="message" rows="5" placeholder="Tulis pesan Anda..." required></textarea>
 
-    <button type="submit">Kirim Pesan</button>
-    <div id="status"></div>
-  </form>
-</div>
+      <button type="submit">Kirim Pesan</button>
+      <div id="response"></div>
+    </form>
+  </div>
 
-<script>
-  (function() {
-    // GANTI dengan Public Key dari akun EmailJS kamu
-    emailjs.init("myPTFSv_hHo0YXPT2");
-  })();
+  <script>
+    (function(){
+      emailjs.init("myPTFSv_hHo0YXPT2"); // Public key kamu
+    })();
 
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const responseEl = document.getElementById("response");
 
-    const status = document.getElementById('status');
-    status.textContent = 'Mengirim pesan...';
-
-    emailjs.send("service_p4h68sg", "template_a0wwhxw", {
-      nama: this.nama.value,
-      email: this.email.value,
-      pesan: this.pesan.value
-    }).then(() => {
-      status.textContent = 'Pesan berhasil dikirim ke IPWIJA Foodie!';
-      this.reset();
-    }, (err) => {
-      status.textContent = 'Gagal mengirim pesan. Silakan coba lagi.';
-      console.error('EmailJS Error:', err);
+      emailjs.send("service_p4h68sg", "template_a0wwhxw", {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+      })
+      .then(function() {
+        responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
+        document.getElementById("contact-form").reset();
+      }, function(error) {
+        console.log("EmailJS Error:", error);
+        responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
