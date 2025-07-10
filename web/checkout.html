@@ -17,7 +17,7 @@
 <body>
 
 <div class="container">
-  <h2>Form Checkout (QRIS)</h2>
+  <h2>Form Checkout</h2>
   <form id="checkout-form">
     <label>Jumlah Barang:</label>
     <input type="number" id="jumlah" value="1" min="1" required>
@@ -37,7 +37,7 @@
 
     <div id="qr-container">
       <p>Scan QRIS untuk membayar:</p>
-      <img src="image/qr.jpg" alt="QRIS Code"/>
+      <img id="qr-image" src="image/qr.jpg" alt="QRIS Code"/>
     </div>
 
     <button type="submit">Bayar Sekarang</button>
@@ -60,11 +60,7 @@
 
     // Jika metode QRIS dipilih, tampilkan QR dengan isi QRIS EMVCo
     if (metode.value === "qris" && t > 0) {
-      // Simulasi QRIS Dynamic - seharusnya ini di-generate dari backend/payment gateway
-      const qrisData = `00020101021226680016ID.CO.QRIS.WWW01189360091501234567890203UMI5204599953033605406${t.toString().padStart(6, '0')}5802ID5909Nama Toko6010Jakarta62070703A0163043C5C`;
-      const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=${encodeURIComponent(qrisData)}`;
-      qrImage.src = qrUrl;
-      qrContainer.style.display = "block";
+      <img id="qr-image" src="image/qr.jpg" alt="QRIS Code"/>
     } else {
       qrContainer.style.display = "none";
     }
