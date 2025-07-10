@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Katalog Produk Makanan</title>
-  <link rel="stylesheet" href="katalog.css">
+  <link rel="stylesheet" href="katalog.css" />
 </head>
 <body>
   <header>
@@ -14,33 +14,92 @@
 
   <main class="produk-container">
     <div class="produk">
-      <img src="image/nasigoreng.jpg" alt="Nasi Goreng">
+      <img src="image/nasigoreng.jpg" alt="Nasi Goreng" />
       <h3>Nasi Goreng Spesial</h3>
-      <p class="harga">Rp 25.000</p>
-      <button onclick="window.location.href='https://dwiputrobagussugianto.github.io/PW/web/checkout.html'">
-      Beli Sekarang
-    </button>
+      <p class="harga">25000</p>
+      <button onclick="tambahKeKeranjang('Nasi Goreng Spesial', 25000)">Pesan Sekarang</button>
     </div>
     <div class="produk">
-      <img src="image/miegoreng.jpg" alt="Mie Goreng"/>
+      <img src="image/miegoreng.jpg" alt="Mie Goreng" />
       <h3>Mie Goreng dengan Kerupuk</h3>
-      <p class="harga">Rp 20.000</p>
-      <button onclick="window.location.href='https://dwiputrobagussugianto.github.io/PW/web/checkout.html'">
-      Beli Sekarang
-    </button>
+      <p class="harga">20000</p>
+      <button onclick="tambahKeKeranjang('Mie Goreng dengan Kerupuk', 20000)">Pesan Sekarang</button>
     </div>
     <div class="produk">
-      <img src="image/nasiayam.jpg" alt="Ayam Goreng"/>
-      <h3>Nasi Putih, Ayam Goreng, Sambal, dan Sayur</h3>
-      <p class="harga">Rp 30.000</p>
-      <button onclick="window.location.href='https://dwiputrobagussugianto.github.io/PW/web/checkout.html'">
-      Beli Sekarang
-    </button>
+      <img src="image/nasiayam.jpg" alt="Ayam Goreng" />
+      <h3>Nasi Ayam Komplit</h3>
+      <p class="harga">30000</p>
+      <button onclick="tambahKeKeranjang('Nasi Ayam Komplit', 30000)">Pesan Sekarang</button>
     </div>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Foodie IPWIJA. Created by Sevti and Dwi. All rights reserved.</p>
-  </footer>
+  <section class="keranjang" id="keranjang">
+    <h2>Keranjang Belanja</h2>
+    <ul id="daftar-keranjang"></ul>
+    <p>Total: Rp <span id="total-harga">0</span></p>
+    <button onclick="tampilkanMetodePembayaran()">Checkout</button>
+  </section>
+
+  <section id="pembayaran" style="display:none">
+    <h2>Pilih Metode Pembayaran</h2>
+    <button onclick="prosesPembayaran('cash')">Bayar di Kasir (Cash)</button>
+    <button onclick="prosesPembayaran('qr')">Bayar dengan Kode QR</button>
+  </section>
+
+  <section id="struk" style="display:none">
+    <h2>Struk Pembelian</h2>
+    <div id="detail-struk"></div>
+  </section>
+
+  <script>
+    const keranjang = [];
+
+    function tambahKeKeranjang(nama, harga) {
+      const item = keranjang.find(i => i.nama === nama);
+      if (item) {
+        item.jumlah += 1;
+      } else {
+        keranjang.push({ nama, harga, jumlah: 1 });
+      }
+      tampilkanKeranjang();
+    }
+
+    function tampilkanKeranjang() {
+      const daftar = document.getElementById("daftar-keranjang");
+      daftar.innerHTML = "";
+      let total = 0;
+      keranjang.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.nama} x${item.jumlah} - Rp ${item.harga * item.jumlah}`;
+        daftar.appendChild(li);
+        total += item.harga * item.jumlah;
+      });
+      document.getElementById("total-harga").textContent = total;
+    }
+
+    function tampilkanMetodePembayaran() {
+      document.getElementById("pembayaran").style.display = "block";
+    }
+
+    function prosesPembayaran(metode) {
+      let struk = "<ul>";
+      let total = 0;
+      keranjang.forEach(item => {
+        struk += `<li>${item.nama} x${item.jumlah} - Rp ${item.harga * item.jumlah}</li>`;
+        total += item.harga * item.jumlah;
+      });
+      struk += `</ul><p><strong>Total: Rp ${total}</strong></p>`;
+
+      if (metode === "cash") {
+        struk += `<p>Silakan bayar ke kasir dengan jumlah di atas.</p>`;
+      } else if (metode === "qr") {
+        struk += `<p>Silakan scan QR Code di bawah ini untuk membayar:</p>`;
+        struk += `<img src='image/qrcodecontoh.png' alt='QR Code' style='width:200px'>`;
+      }
+
+      document.getElementById("detail-struk").innerHTML = struk;
+      document.getElementById("struk").style.display = "block";
+    }
+  </script>
 </body>
 </html>
