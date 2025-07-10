@@ -77,30 +77,33 @@
   </div>
 
   <!-- Script EmailJS v4 -->
-  <script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  <!-- Load EmailJS SDK versi UMD (tanpa module) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  emailjs.init("myPTFSv_hHo0YXPT2"); // Ganti public key kamu
+<script>
+  (function () {
+    emailjs.init("myPTFSv_hHo0YXPT2"); // Ganti dengan PUBLIC KEY kamu
 
-  document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-    const responseEl = document.getElementById("response");
+      const responseEl = document.getElementById("response");
 
-    emailjs.send("service_p4h68sg", "template_6pjo8ko", {
-      name: this.name.value,
-      email: this.email.value,
-      message: this.message.value
-    })
-    .then(() => {
-      responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
-      this.reset();
-    })
-    .catch((error) => {
-      console.error("EmailJS Error:", error);
-      responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
+      emailjs.send("service_p4h68sg", "template_6pjo8ko", {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+      })
+      .then(() => {
+        responseEl.innerHTML = "<p class='success'>Pesan berhasil dikirim. Terima kasih!</p>";
+        this.reset();
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        responseEl.innerHTML = "<p class='error'>Gagal mengirim pesan. Silakan coba lagi.</p>";
+      });
     });
-  });
+  })();
 </script>
 </body>
 </html>
