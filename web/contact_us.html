@@ -78,16 +78,16 @@
 
   <!-- Script EmailJS v4 -->
   <script type="module">
-  import * as emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
 
-  // ✅ fix: gunakan .default.init()
-  emailjs.default.init("myPTFSv_hHo0YXPT2"); // Ganti dengan public key kamu
+  emailjs.init("myPTFSv_hHo0YXPT2"); // Ganti public key kamu
 
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
+
     const responseEl = document.getElementById("response");
 
-    emailjs.default.send("service_p4h68sg", "template_6pjo8ko", {
+    emailjs.send("service_p4h68sg", "template_6pjo8ko", {
       name: this.name.value,
       email: this.email.value,
       message: this.message.value
