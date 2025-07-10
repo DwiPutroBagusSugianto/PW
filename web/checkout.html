@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout dengan QRIS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
+    .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 10px; margin-top: 5px; }
+    #qr-container { margin-top: 20px; text-align: center; display: none; }
+    #qr-container img { margin-top: 10px; }
+    button { width: 100%; padding: 12px; margin-top: 20px; background: green; color: white; border: none; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Form Checkout (QRIS)</h2>
+  <form id="checkout-form">
+    <label>Jumlah Barang:</label>
+    <input type="number" id="jumlah" value="1" min="1" required>
+
+    <label>Harga per Item (Rp):</label>
+    <input type="number" id="harga" value="10000" min="0" required>
+
+    <label>Total Harga (Rp):</label>
+    <input type="number" id="total" readonly>
+
+    <label>Metode Pembayaran:</label>
+    <select id="metode">
+      <option value="">-- Pilih --</option>
+      <option value="cash">Cash</option>
+      <option value="qris">QRIS</option>
+    </select>
+
+    <div id="qr-container">
+      <p>Scan QRIS untuk membayar:</p>
+      <img id="qr-image" src="" alt="QRIS Code">
+    </div>
+
+    <button type="submit">Bayar Sekarang</button>
+  </form>
+</div>
+
+<script>
+  const jumlah = document.getElementById("jumlah");
+  const harga = document.getElementById("harga");
+  const total = document.getElementById("total");
+  const metode = document.getElementById("metode");
+  const qrContainer = document.getElementById("qr-container");
+  const qrImage = document.getElementById("qr-image");
+
+  function updateTotal() {
+    const j = parseInt(jumlah.value) || 0;
+    const h = parseInt(harga.value) || 0;
+    const t = j * h;
+    total.value = t;
+
+    // Jika metode QRIS dipilih, tampilkan QR dengan isi QRIS EMVCo
+    if (metode.value === "qris" && t > 0) {
+      // Simulasi QRIS Dynamic - seharusnya ini di-generate dari backend/payment gateway
+      const qrisData = `00020101021226680016ID.CO.QRIS.WWW01189360091501234567890203UMI5204599953033605406${t.toString().padStart(6, '0')}5802ID5909Nama Toko6010Jakarta62070703A0163043C5C`;
+      const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=${encodeURIComponent(qrisData)}`;
+      qrImage.src = qrUrl;
+      qrContainer.style.display = "block";
+    } else {
+      qrContainer.style.display = "none";
+    }
+  }
+
+  jumlah.addEventListener("input", updateTotal);
+  harga.addEventListener("input", updateTotal);
+  metode.addEventListener("change", updateTotal);
+  updateTotal();
+</script>
+
+</body>
+</html>
