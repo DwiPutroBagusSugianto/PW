@@ -87,11 +87,3 @@ button:hover {
     transform: translateY(0);
   }
 }
-
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-}
