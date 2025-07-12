@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Katalog Produk Makanan</title>
   <link rel="stylesheet" href="katalog.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,6 +19,7 @@
   </header>
 
   <main class="produk-container">
+    <!-- Produk-produk -->
     <div class="produk">
       <img src="image/nasigoreng.jpg" alt="Nasi Goreng" />
       <h3>Nasi Goreng Spesial</h3>
@@ -118,13 +125,28 @@
       tampilkanKeranjang();
     }
 
+    function hapusDariKeranjang(nama) {
+      const index = keranjang.findIndex(i => i.nama === nama);
+      if (index !== -1) {
+        keranjang[index].jumlah -= 1;
+        if (keranjang[index].jumlah <= 0) {
+          keranjang.splice(index, 1);
+        }
+      }
+      tampilkanKeranjang();
+    }
+
     function tampilkanKeranjang() {
       const daftar = document.getElementById("daftar-keranjang");
       daftar.innerHTML = "";
       let total = 0;
       keranjang.forEach(item => {
         const li = document.createElement("li");
-        li.textContent = `${item.nama} x${item.jumlah} - Rp ${item.harga * item.jumlah}`;
+        li.innerHTML = `
+          ${item.nama} x${item.jumlah} - Rp ${item.harga * item.jumlah}
+          <button class="ikon tambah" onclick="tambahKeKeranjang('${item.nama}', ${item.harga})">➕</button>
+          <button class="ikon hapus" onclick="hapusDariKeranjang('${item.nama}')">➖</button>
+        `;
         daftar.appendChild(li);
         total += item.harga * item.jumlah;
       });
@@ -132,6 +154,10 @@
     }
 
     function tampilkanMetodePembayaran() {
+      if (keranjang.length === 0) {
+        alert("Keranjang kosong. Silakan pilih produk terlebih dahulu.");
+        return;
+      }
       document.getElementById("pembayaran").style.display = "block";
     }
 
@@ -145,9 +171,9 @@
       struk += `</ul><p><strong>Total: Rp ${total}</strong></p>`;
 
       if (metode === "cash") {
-        struk += `<p>Pesanan Anda akan di Siapkan!. Silakan bayar ke kasir dengan jumlah di atas.</p>`;
+        struk += `<p>Pesanan Anda akan disiapkan. Silakan bayar ke kasir dengan jumlah di atas.</p>`;
       } else if (metode === "qr") {
-        struk += `<p>Pesanan Anda akan di Siapkan!. Silakan scan QR Code di bawah ini untuk membayar:</p>`;
+        struk += `<p>Pesanan Anda akan disiapkan. Silakan scan QR Code di bawah ini untuk membayar:</p>`;
         struk += `<img src='image/qr.jpg' alt='QR Code' style='width:200px'/>`;
       }
 
@@ -155,8 +181,9 @@
       document.getElementById("struk").style.display = "block";
     }
   </script>
+
   <footer>
-    <p>&copy; 2025 Foodie IPWIJA. Created by Sevti and Dwi. All rights reserved.</p>
+    <p>&copy; 2025 Foodie IPWIJA. Created by Sevti and Dwi. All rights reserved.</p>
   </footer>
 </body>
 </html>
