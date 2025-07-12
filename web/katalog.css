@@ -107,6 +107,33 @@ header p {
   background-color: #218838;
 }
 
+button.ikon {
+  margin-left: 6px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button.ikon:hover {
+  transform: scale(1.1);
+}
+
+button.tambah {
+  background-color: #28a745; /* Hijau IPWIJA */
+  color: white;
+}
+
+button.hapus {
+  background-color: #dc3545; /* Merah IPWIJA */
+  color: white;
+}
+
+
 /* Pembayaran */
 #pembayaran {
   margin-top: 30px;
